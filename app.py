@@ -1,3 +1,4 @@
+from crypt import methods
 from unicodedata import name
 from flask import Flask, jsonify, request, render_template
 from flask_dropzone import Dropzone
@@ -18,7 +19,7 @@ app.config.update(
 dropzone = Dropzone(app)
 
 
-@app.route('/')
+@app.route('/', methods=['POST', 'GET'])
 def upload():
     if request.method == 'POST':
         f = request.files.get('file')
