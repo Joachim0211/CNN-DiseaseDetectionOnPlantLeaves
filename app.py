@@ -23,7 +23,7 @@ def upload():
     # if request.method == 'POST':
     #     f = request.files.get('file')
     #     f.save(os.path.join(app.config['UPLOADED_PATH'], f.filename))
-    return "Hello World" #render_template('index.html')
+    return "Hello New World" #render_template('index.html')
 
 # @app.route('/answer')
 # def up():
