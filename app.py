@@ -18,7 +18,7 @@ app = Flask(__name__)
 # dropzone = Dropzone(app)
 
 
-@app.route('/', methods=['POST', 'GET'])
+@app.route('/')
 def upload():
     # if request.method == 'POST':
     #     f = request.files.get('file')
