@@ -3,16 +3,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/mainpage.css') }}">
   <title>Flask-File Drag Drop System</title>
   {{ dropzone.load_css() }}
-  {{ dropzone.style('border: 2px dashed #0087F7; margin: 10%; min-height: 400px;') }}
+  {{ dropzone.style('border: 2px dashed #0087F7; margin: 5%; height: 200px; width: 400px;') }}
 </head>
 <body>
-	<div style="color:blue;text-align:center;border: 4px solid #0087F7"> 
-	Here is the place to drop your image </div>
-  
-  {{ dropzone.create(action='upload') }}
-  {{ dropzone.load_js() }}
-  {{ dropzone.config() }}
+  <h1>
+    This is the Main Page
+  </h1>
+	<p> 
+	  Here is the place to drop your image 
+  </p>
+  <div class="dropzone-container-div">
+    <div></div>
+      {{ dropzone.create(action='upload') }}
+      {{ dropzone.load_js() }}
+      {{ dropzone.config() }}
+    </div>
+  </div>
+  <div class="button-container-div">
+    <button type="button" onclick="/answer" class="button">Click her to see whether your plant has a disease</button>
+  </div>
 </body>
 </html>
