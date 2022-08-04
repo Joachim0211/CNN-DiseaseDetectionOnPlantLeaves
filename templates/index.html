@@ -10,20 +10,26 @@
 </head>
 <body>
   <h1>
-    This is the Main Page
+    Are Your Plants Healthy?
   </h1>
-	<p> 
+	<h2> 
 	  Here is the place to drop your image 
-  </p>
+  </h2>
   <div class="dropzone-container-div">
     <div></div>
       {{ dropzone.create(action='upload') }}
       {{ dropzone.load_js() }}
-      {{ dropzone.config() }}
-    </div>
+      {{ dropzone.config(custom_options="success: function(file, response){document.querySelector('button').innerText = response.data}") }}
+</div>
+  </div>
+
+<!-- document.querySelector("p").innerText = response -->
+  <div class="button-container-div">
+    <button class = "findings">The result of the analysis will appear here!</button>  
   </div>
   <div class="button-container-div">
-    <button type="button" class="button">Click her to see whether your plant has a disease</button>
+    <button onClick="document.querySelector('button').innerHTML = 'The result of the analysis will appear here!'" type="button" class="button">OK</button>
   </div>
+  
 </body>
 </html>
