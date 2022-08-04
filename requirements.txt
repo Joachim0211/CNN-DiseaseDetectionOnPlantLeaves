@@ -3,5 +3,4 @@ flask-dropzone
 gunicorn
 uwsgi
 numpy
-PIL
 time
