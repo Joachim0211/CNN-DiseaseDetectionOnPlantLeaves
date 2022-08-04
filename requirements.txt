@@ -3,3 +3,4 @@ flask-dropzone
 gunicorn
 uwsgi
 numpy
+Pillow
