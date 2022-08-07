@@ -19,16 +19,22 @@
     <div></div>
       {{ dropzone.create(action='upload') }}
       {{ dropzone.load_js() }}
-      {{ dropzone.config(custom_options="success: function(file, response){document.querySelector('button').innerText = response.data}") }}
-</div>
+      {{ dropzone.config(custom_options="success: function(file, response){document.getElementById('but2').innerText = file.name, document.getElementById('but1').innerText = response.data }") }}
+    </div>
   </div>
 
 <!-- document.querySelector("p").innerText = response -->
+<div class="button-container-div">
+  <button id="but1" class = "findings">The result of the analysis will appear here!</button>  
+</div>  
+
+
+<div class="button-container-div">
+    <button id="but2" class = "findings"></button>  
+</div>
+  
   <div class="button-container-div">
-    <button class = "findings">The result of the analysis will appear here!</button>  
-  </div>
-  <div class="button-container-div">
-    <button onClick="document.querySelector('button').innerHTML = 'The result of the analysis will appear here!'" type="button" class="button">OK</button>
+    <button id="but3" onClick="document.getElementById('but1').innerHTML = 'The result of the analysis will appear here!'" type="button" class="button">OK</button>
   </div>
   
 </body>
