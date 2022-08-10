@@ -10,7 +10,7 @@ import tensorflow as tf
 import os
 import cv2 as cv
 import base64
-import time
+
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 print(basedir)
@@ -35,62 +35,43 @@ submission = 'Your file name'
 
 @app.route('/upload', methods=['POST'])
 def upload():
-    a = request.files.get('file')
     f = request.files.get('file').read()
     npimg = np.fromstring(f, np.uint8)
-    
     #f.save(os.path.join(app.config['UPLOADED_PATH'], f.filename))
     print(f)
-    #ff = Image.open(f'./uploads/{f.filename}')
-    #img_0 = PIL.Image.open(ff)
-    
     img = cv.imdecode(npimg,cv.IMREAD_COLOR)
     img_0 = cv.resize(img,(256,256))
-    print(img)
-    #img_0 = img.resize((256,256),  Image.Resampling.LANCZOS)
     img_1 = np.array(img_0)
-    print(img_1.shape)
-    img_batch = np.expand_dims(img_1, 0)
-    print(img_batch.shape) 
-    #img_array = tf.keras.utils.img_to_array(img)
-
-    # img_batch = tf.expand_dims(img_array, 0)
-
-    predictions = MODEL.predict(img_batch)
+    img_ready = np.expand_dims(img_1, 0) 
+    
+    predictions = MODEL.predict(img_ready)
     score = tf.nn.softmax(predictions[0])
     
    
     # global result1
-    if 'Early' in a.filename:
-        result1 = 'Early Blight'
-    elif 'RS_LB' in a.filename:
-        result1 = 'Late Blight'
-    elif 'RS_HL' in a.filename:
-        result1 = 'Your picture was labeled "Healthy"'
-    else:
-        result1 = a.filename
-    #f.save(os.path.join(app.config['UPLOADED_PATH'], f.filename))
-    
-    # img = tf.image.resize(f, [256, 256])
-    # # img_array = tf.keras.utils.img_to_array(img)
-    # # img_batch = tf.expand_dims(img_array, 0)
-    # # img.save(os.path.join(app.config['UPLOADED_PATH'], f.filename))
-    # img_1 = np.array(PIL.Image.open(img))
-    # img_batch = np.expand_dims(img_1, 0)      
-    #img = tf.image.resize(f, [256, 256])
-    
+    # if 'Early' in a.filename:
+    #     result1 = 'Early Blight'
+    # elif 'RS_LB' in a.filename:
+    #     result1 = 'Late Blight'
+    # elif 'RS_HL' in a.filename:
+    #     result1 = 'Your picture was labeled "Healthy"'
+    # else:
+    #     result1 = a.filename
+        
     if 100 - np.max(score) < 60:
         result = "The analysis shows no clear result"
     else:
         if class_names[np.argmax(score)] == 'Potato___healthy':
             result = "Your plant is healthy with a {:.2f} percent confidence.".format(100 - np.max(score))
+            result1=0
         elif class_names[np.argmax(score)] == 'Potato___Early_blight':
             result = "Your plant shows symptoms of {} with a {:.2f} percent confidence.".format(class_names[np.argmax(score)], 100 - np.max(score))
+            result1=1
         elif class_names[np.argmax(score)] == 'Potato___Late_blight':
             result = "Your plant shows symptoms of {} with a {:.2f} percent probability.".format(class_names[np.argmax(score)], 100 - np.max(score))
+            result1=2
     
-    # time.sleep(3)
-    print('woken up')
+    print('app run')
 
 
     return jsonify(data=result, errors=result1)

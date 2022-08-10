@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/mainpage.css') }}">
+  
   <title>Flask-File Drag Drop System</title>
   {{ dropzone.load_css() }}
   {{ dropzone.style('border: 2px dashed #0087F7; margin: 5%; height: 200px; width: 400px;') }}
@@ -31,11 +32,9 @@
   <button id="but1" class = "findings">The result of the analysis will appear here!</button>  
 </div>  
 
-
-
   <div class="button-container-div">
-    <button id="but3" onClick="window.location.reload();" type="button" class="button">New Analyses</button>
-    <button id="but3" onClick="window.location.reload();" type="button" class="button">Learn More</button>
+    <button id="but2" onClick="window.location.reload();" type="button" class="button">New Analyses</button>
+    <button id="but3" onClick="window.open('https://www.potatopro.com/world/potato-statistics');" type="button" class="button">Learn More</button>
   </div>
 
 </body>
