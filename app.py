@@ -62,16 +62,17 @@ def upload():
         result = "The analysis shows no clear result"
     else:
         if class_names[np.argmax(score)] == 'Potato___healthy':
-            result = "Your plant is healthy with a {:.2f} percent confidence.".format(100 - np.max(score))
-            result1=0
-        elif class_names[np.argmax(score)] == 'Potato___Early_blight':
-            result = "Your plant shows symptoms of {} with a {:.2f} percent confidence.".format(class_names[np.argmax(score)], 100 - np.max(score))
-            result1=1
-        elif class_names[np.argmax(score)] == 'Potato___Late_blight':
+            result = "Your plant is healthy with a {:.2f} percent probability.".format(100 - np.max(score))
+            result1='Learn more about Healthy Potatoes'
+        elif class_names[np.argmax(score)] == 'Potato___Early_Blight':
             result = "Your plant shows symptoms of {} with a {:.2f} percent probability.".format(class_names[np.argmax(score)], 100 - np.max(score))
-            result1=2
+            result1='Learn more about Early Blight'
+        elif class_names[np.argmax(score)] == 'Potato___Late_blight':
+            result = "Your planta shows symptoms of {} with a {:.2f} percent probability.".format(class_names[np.argmax(score)], 100 - np.max(score))
+            result1='Learn more about Late Blight'
     
     print('app run')
+    print(np.argmax(score))
 
 
     return jsonify(data=result, errors=result1)

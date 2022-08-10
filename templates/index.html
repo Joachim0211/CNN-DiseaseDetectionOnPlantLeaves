@@ -19,11 +19,39 @@
   <h2>
     It will be analysed.
   </h2>
-  <div class="dropzone-container-div">
+  <div id="drop" class="dropzone-container-div">
     <div></div>
       {{ dropzone.create(action='upload') }}
       {{ dropzone.load_js() }}
-      {{ dropzone.config(custom_options="success: function(file, response){document.getElementById('but1').innerText = response.data }") }}
+      {{ dropzone.config(custom_options="success: function(file, response)
+      {document.getElementById('but1').innerText = response.data;
+      
+      if(response.errors === 'Learn more about Healthy Potatoes'){
+        const a = document.getElementById('but3');
+        a.onclick = function () {
+          window.open('https://www.potatopro.com/world/potato-statistics')
+        }
+        console.log(response.errors);
+        a.innerText = response.errors;
+      }
+      if(response.errors === 'Learn more about Early Blight'){
+        const b = document.getElementById('but3');
+        b.onclick = function () {
+          window.open('https://extension.umn.edu/disease-management/early-blight-tomato-and-potato')
+        }
+        console.log(response.errors)
+        b.innerText = response.errors;
+      }
+      if(response.errors === 'Learn more about Late Blight'){
+        const c = document.getElementById('but3');
+        c.onclick = function () {
+          window.open('https://extension.umn.edu/disease-management/late-blight#monitoring-for-late-blight-3038010')
+        }
+        console.log(response.errors)
+        c.innerText = response.errors;
+      }
+    
+    }") }}
     </div>
   </div>
 
@@ -36,6 +64,6 @@
     <button id="but2" onClick="window.location.reload();" type="button" class="button">New Analyses</button>
     <button id="but3" onClick="window.open('https://www.potatopro.com/world/potato-statistics');" type="button" class="button">Learn More</button>
   </div>
-
+  <script type="text/javascript" src="{{url_for('static', filename='js/myfunctions.js')}}"></script>
 </body>
 </html>
