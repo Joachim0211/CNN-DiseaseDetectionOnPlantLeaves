@@ -40,7 +40,7 @@ def upload():
     npimg = np.fromstring(f, np.uint8)
     
     #f.save(os.path.join(app.config['UPLOADED_PATH'], f.filename))
-    print(type(npimg))
+    print(f)
     #ff = Image.open(f'./uploads/{f.filename}')
     #img_0 = PIL.Image.open(ff)
     
@@ -87,7 +87,7 @@ def upload():
         elif class_names[np.argmax(score)] == 'Potato___Early_blight':
             result = "Your plant shows symptoms of {} with a {:.2f} percent confidence.".format(class_names[np.argmax(score)], 100 - np.max(score))
         elif class_names[np.argmax(score)] == 'Potato___Late_blight':
-            result = "Your plant shows symptoms of {} with a {:.2f} percent confidence.".format(class_names[np.argmax(score)], 100 - np.max(score))
+            result = "Your plant shows symptoms of {} with a {:.2f} percent probability.".format(class_names[np.argmax(score)], 100 - np.max(score))
     
     # time.sleep(3)
     print('woken up')
